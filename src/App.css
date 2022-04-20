@@ -9,9 +9,9 @@
 }
 
 .car {
-  width: 50px;
-  height: 50px;
-  background-color: deeppink;
+  width: 150px;
+  height: 80px;
+  transition: transform 0.5s ease-out;
 }
 
 .App-logo {

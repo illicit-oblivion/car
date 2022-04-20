@@ -1,11 +1,12 @@
 import React, { useEffect, useRef, useState } from 'react';
 import './App.css';
 
-const step = 25;
+const step = 15;
 
 function App() {
   const [coords, setCoords] = useState<[number, number]>([0, 0]);
-  const ref = useRef<HTMLDivElement | null>(null);
+  const [rotate, setRotate] = useState(0)
+  const ref = useRef<HTMLImageElement | null>(null);
 
   useEffect(
     () => {
@@ -25,17 +26,21 @@ function App() {
               setCoords((prevValue) => [prevValue[0], prevValue[1] - step]);
             } else {
               setCoords((prevValue) => [prevValue[0], prevValue[1] - step - diff]);
-            } break;
+            }
+            setRotate(-90)
+            break;
           }
 
           case 'ArrowDown': {
             const documentHeight = documentElement.clientHeight;
             const diff = documentHeight - (boundingClientRect.bottom + step);
             if (diff > 0) {
-              setCoords((prevValue) => [prevValue[0], prevValue[1] + step]); break;
+              setCoords((prevValue) => [prevValue[0], prevValue[1] + step]);
             } else {
               setCoords((prevValue) => [prevValue[0], prevValue[1] + step + diff]);
-            } break;
+            }
+            setRotate(90);
+            break;
           }
 
           case 'ArrowRight': {
@@ -46,6 +51,7 @@ function App() {
             } else {
               setCoords((prevValue) => [prevValue[0] + step + diff, prevValue[1]]);
             }
+            setRotate(0)
             break;
           }
 
@@ -56,6 +62,7 @@ function App() {
             } else {
               setCoords((prevValue) => [prevValue[0] - step - diff, prevValue[1]]);
             }
+            setRotate(180)
             break;
           }
           default: break;
@@ -71,7 +78,13 @@ function App() {
 
   return (
     <div className="App">
-      <div className="car" ref={ref} style={{ transform: `translate(${coords[0]}px, ${coords[1]}px)` }} />
+      <img
+        className="car"
+        alt={'car'}
+        ref={ref}
+        src={'/car.png'}
+        style={{ transform: `translate(${coords[0]}px, ${coords[1]}px) rotate(${rotate}deg)` }}
+      />
     </div>
   );
 }
