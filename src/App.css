@@ -6,12 +6,19 @@
   align-items: center;
   justify-content: center;
   overflow: hidden;
+  position: relative;
 }
 
 .car {
-  width: 150px;
-  height: 80px;
-  transition: transform 0.5s ease-out;
+  position: absolute;
+}
+
+.obstacle {
+  position: absolute;
+  background:-webkit-repeating-linear-gradient(45deg, #fbff00 11%, #000000 27%);
+  background:-o-repeating-linear-gradient(45deg, #fbff00 11%, #000000 27%);
+  background:-moz-repeating-linear-gradient(45deg, #fbff00 11%, #000000 27%);
+  background:repeating-linear-gradient(45deg, #fbff00 11%, #000000 27%);
 }
 
 .App-logo {
