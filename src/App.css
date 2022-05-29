@@ -11,6 +11,7 @@
 
 .car {
   position: absolute;
+  transition: all linear .5s;
 }
 
 .obstacle {
@@ -54,4 +55,13 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+.view-mode-buttons {
+  display: flex;
+  flex-direction: column;
+  row-gap: 5px;
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
 }
