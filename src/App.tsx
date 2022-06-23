@@ -82,14 +82,15 @@ function App() {
     }
 
     const timer = setInterval(() => {
-      if(currentIndex === shortest.length-1) {
-        return
+      if (currentIndex === shortest.length -1) {
+        clearInterval(timer)
       }
 
       setCarPosition(shortest[currentIndex]);
+      const prevDirection = currentIndex-1 >= 0 ? shortest[currentIndex-1].direction: undefined;
       const direction = shortest[currentIndex].direction;
       if (direction) {
-         setRotate(getRotation(direction))
+         setRotate(getRotation( direction, prevDirection))
        }
       currentIndex++;
     }, 200);
@@ -137,17 +138,17 @@ function App() {
           height: carSize.height ,
           transform: `rotate(${rotate}deg)`}}
       />}
-      {obstacles.map(it =>
-          <div className="obstacle" style={{ top:it.y, left: it.x, width: it.width, height: it.height}}>
+      {obstacles.map((it, key) =>
+          <div className="obstacle" key={key} style={{ top:it.y, left: it.x, width: it.width, height: it.height}}>
           </div>
       )}
       <div className='view-mode-buttons'>
         <label>
-          <input type="radio" checked={view === 'wagon'} onClick={() => setView('wagon')}/>
+          <input type="radio" checked={view === 'wagon'} onChange={() => setView('wagon')}/>
           Тележка
         </label>
         <label>
-          <input type="radio" checked={view === 'car'} onClick={() => setView('car')}/>
+          <input type="radio" checked={view === 'car'} onChange={() => setView('car')}/>
           Машинка
         </label>
       </div>
