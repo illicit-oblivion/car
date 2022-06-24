@@ -1,0 +1,16 @@
+# Use postgres/example user/password credentials
+version: '3.1'
+
+services:
+
+  car-client:
+    restart: always
+    build:
+      context: ./
+      args:
+        REACT_APP_API_URL: ${API_URL}
+      dockerfile: Dockerfile
+    ports:
+      - 5555:80
+    container_name: car-client
+      
