@@ -1,6 +1,8 @@
 import React, { useEffect, useRef, useState} from 'react';
 import './App.css';
 
+const API_URL = "http://localhost:5002"
+//const API_URL = process.env.REACT_APP_API_URL;
 
 type Cord = {
   x: number,
@@ -64,7 +66,7 @@ function App() {
 
   useEffect(
      () => {
-       fetch('http://localhost:5002/api/map/info').then(res => res.json())
+       fetch(`${API_URL}/api/map/info`).then(res => res.json())
            .then((res: MapInfoResponse) => {
              setStartCarSizeAndPosition(res.startPosition);
              const result = res.obstacles.map((it) => ({
@@ -123,7 +125,7 @@ function App() {
         "y": targetY
       }
     });
-    fetch('http://localhost:5002/api/path/shortest', {method: 'POST', body,     headers: {
+    fetch(`${API_URL}/api/path/shortest`, {method: 'POST', body,     headers: {
         'Content-Type': 'application/json-patch+json'
       }, }).then(it => {
       it.json().then(response => {
